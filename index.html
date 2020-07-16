@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>James Redux Library</title>
+    
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <div class="header">
+        <h1>My Library</h1>
+    
+    </div>
+    <div class="form-header">
+        <h1>Add New Book to List</h1>
+    </div>
+
+    <div class="form">
+        <form id="new-book-form">
+           
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title"><br>
+            <label for="author">Author:</label><br>
+            <input type="text" id="author" name="author"><br>
+            <label for="pages">Pages:</label><br>
+            <input type="number" id="pages" name="pages"><br>
+          
+            
+            <input type="radio" id="yesread" name="read" value="yesread">
+            <label for="yesread">Already Read</label><br>
+            <input type="radio" id="notread" name="read" value="notread">
+            <label for="notread">Want to Read</label><br>
+           <input id="new-book" type="submit" value="Submit">
+           
+        </form> 
+    </div>
+
+    <div class="table-header">
+        <div class='book-row'>
+            <div class="book-detail">TITLE</div>
+            <div class="book-detail">AUTHOR</div>
+            <div>PAGES</div>
+            
+            <div>READ? </div>
+            <div class="end-cell"></div>
+            <div class="end-cell"></div>
+        </div> 
+    </div>
+    
+
+    <div class="library-list">
+
+       
+        <div id="library-table">
+           
+
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>  
+</body>
+
+</html>
