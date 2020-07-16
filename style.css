@@ -16,6 +16,10 @@ body {
     
 }
 
+input {
+    color: black !important;
+}
+
 
 .header {
     min-height: 150px;
