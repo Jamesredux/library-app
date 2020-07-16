@@ -32,13 +32,8 @@ input {
 .header h1 {
     width: 600px;
     color: #fff;
-    /* background-color: var(--lightblue); */
     font-size: 3rem;
     padding: 20px;
-    /* border-radius: 5px;
-    -webkit-box-shadow: 4px 4px 11px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 4px 4px 11px 0px rgba(0,0,0,0.75);
-    box-shadow: 4px 4px 11px 0px rgba(0,0,0,0.75); */
     text-align: center;
 }
 
@@ -67,9 +62,8 @@ input {
     border: 1px solid #0f1f2e;
     border-radius: 5px;
     display: flex;
-  
     min-width: 650px;
-    /* justify-content: space-evenly; */
+ 
   
 }
 

@@ -28,6 +28,11 @@ let seedLibrary = [
 
 const myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || Array.from(seedLibrary);
 
+const bookTable = document.getElementById('library-table');
+const addBooks = document.getElementById('new-book-form');
+addBooks.addEventListener('submit', addNewBooks);
+bookTable.addEventListener('click', deleteBook);
+
 function book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -40,41 +45,12 @@ function book(title, author, pages, read) {
     };
 };
 
-// function render() {
-//     for (var i = 0, len = myLibrary.length; i < len; i++) {
-//         createRow(myLibrary[i], i);
-//     };
-// };
-
-// function createRow(book, index) {
-//     var table = document.getElementById("library-table");
-//     var row = table.insertRow();
-
-//     var cell1 = row.insertCell(0);
-//     var cell2 = row.insertCell(1);
-//     var cell3 = row.insertCell(2);
-//     var cell4 = row.insertCell(3);
-//     row.classList.add('book-row', 'index-' + index);
-//     cell1.innerHTML = book.title;
-//     cell2.innerHTML = book.author;
-//     cell3.innerHTML = book.pages;
-//     cell4.innerHTML = book.read;
-
-// }
-const bookTable = document.getElementById('library-table');
-const addBooks = document.getElementById('new-book-form');
-addBooks.addEventListener('submit', addNewBooks);
-bookTable.addEventListener('click', deleteBook);
-
-
 function addNewBooks(e) {
     e.preventDefault(); // stops the page from reloading
     const newTitle = this.querySelector('#title').value;
     const newAuthor = this.querySelector('#author').value;
     const newPages = this.querySelector('#pages').value;
     const yesRead = this.querySelector('#yesread').checked;
-
- 
     
     const newBook = new book(newTitle, newAuthor, newPages, yesRead);
     myLibrary.push(newBook);
@@ -87,23 +63,6 @@ function addNewBooks(e) {
    
 };
 
-// function displayBooksTable(bookList) {
-//     bookTable.innerHTML = bookList.map((book, i) => {
-//         return `
-//         <tr class='book-row index-${i}'>
-//             <td>${book.title}</td>
-//             <td>${book.author}</td>
-//             <td>${book.pages}</td>
-            
-//             <td>${book.read}</td>
-//             <td><button class='toggle-read' type='button'>Read/Unread</button></td>
-//             <td><input type="submit" data-index=${i} class="delete-book" id="index-${i}"   value="delete" /></td>
-//         </tr>    
-//         `;
-//     }).join('');
-//     setButtons();
-
-// };
 
 function displayBooksTable(bookList) {
     bookTable.innerHTML = bookList.map((book, i) => {
@@ -155,7 +114,7 @@ function deleteBook(e) {
         e.stopPropagation();
        
     };    
-}
+};
 
 
 
@@ -169,12 +128,12 @@ function toggleRead(e) {
     displayBooksTable(myLibrary);
     e.stopPropagation();
     
-}
+};
 
 
  window.onload = function() {
     displayBooksTable(myLibrary);
     localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
    
-} 
+}; 
 
