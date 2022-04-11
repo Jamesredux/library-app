@@ -1,62 +1,62 @@
 let seedLibrary = [
   {
-    title: "Catch 22",
-    author: "Joseph Heller",
+    title: 'Catch 22',
+    author: 'Joseph Heller',
     pages: 322,
     read: true,
   },
   {
-    title: "Tinker Tailor Solier Spy",
-    author: "John le Carre",
+    title: 'Tinker Tailor Solier Spy',
+    author: 'John le Carre',
     pages: 433,
     read: true,
   },
   {
-    title: "Finnegans Wake",
-    author: "James Joyce",
+    title: 'Finnegans Wake',
+    author: 'James Joyce',
     pages: 644,
     read: false,
   },
   {
-    title: "Brighton Rock",
-    author: "Graham Greene",
+    title: 'Brighton Rock',
+    author: 'Graham Greene',
     pages: 224,
     read: true,
   },
 ];
 
 const myLibrary =
-  JSON.parse(localStorage.getItem("myLibrary")) || Array.from(seedLibrary);
+  JSON.parse(localStorage.getItem('myLibrary')) || Array.from(seedLibrary);
 
-const bookTable = document.getElementById("library-table");
-const addBooks = document.getElementById("new-book-form");
+const bookTable = document.getElementById('library-table');
+const addBooks = document.getElementById('new-book-form');
 
-const titleInput = document.getElementById("title");
-const authorInput = document.getElementById("author");
-const errorBox = document.querySelector(".error");
-addBooks.addEventListener("submit", addNewBooks);
-bookTable.addEventListener("click", deleteBook);
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const errorBox = document.querySelector('.error');
+addBooks.addEventListener('submit', addNewBooks);
+bookTable.addEventListener('click', deleteBook);
 
-titleInput.addEventListener("input", function (event) {
+titleInput.addEventListener('input', function (event) {
   if (titleInput.validity.valid === false) {
     showError();
   } else {
-    errorBox.textContent = "";
+    errorBox.textContent = '';
   }
 });
 
 const showError = () => {
   const errorList = [];
   if (titleInput.validity.tooLong) {
-    errorList.push("The Title is too Long");
+    errorList.push('The Title is too Long');
   }
   if (!titleInput.validity.valid) {
-    errorList.push("Please input a title.");
+    errorList.push('Please input a title.');
   }
   if (!authorInput.validity.valid) {
-    errorList.push("please input an author");
+    errorList.push('Please input an author');
   }
-  errorBox.textContent = errorList;
+  errorBox.textContent = errorList.join(' ');
 };
 
 function book(title, author, pages, read) {
@@ -64,38 +64,49 @@ function book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.info = function () {
-    var haveRead = this.read ? "read already" : "not read yet";
-    return (
-      this.title +
-      " by " +
-      this.author +
-      ", " +
-      this.pages +
-      " pages, " +
-      haveRead
-    );
-  };
+  // this.info = function () {
+  //   var haveRead = this.read ? 'read already' : 'not read yet';
+  //   return (
+  //     this.title +
+  //     ' by ' +
+  //     this.author +
+  //     ', ' +
+  //     this.pages +
+  //     ' pages, ' +
+  //     haveRead
+  //   );
+  // };
 }
+
+book.prototype.info = function () {
+  var haveRead = this.read ? 'read already' : 'not read yet';
+  return (
+    this.title +
+    ' by ' +
+    this.author +
+    ', ' +
+    this.pages +
+    ' pages, ' +
+    haveRead
+  );
+};
 
 function addNewBooks(e) {
   e.preventDefault(); // stops the page from reloading
-  console.log(addBooks.checkValidity());
   //   first check for validity
   if (!addBooks.checkValidity()) {
     showError();
   } else {
-    const newTitle = this.querySelector("#title").value;
-    const newAuthor = this.querySelector("#author").value;
-    const newPages = this.querySelector("#pages").value;
-    const yesRead = this.querySelector("#yesread").checked;
+    const newTitle = this.querySelector('#title').value;
+    const newAuthor = this.querySelector('#author').value;
+    const newPages = this.querySelector('#pages').value;
+    const yesRead = this.querySelector('#yesread').checked;
 
     const newBook = new book(newTitle, newAuthor, newPages, yesRead);
     myLibrary.push(newBook);
 
-    console.log(newBook);
     displayBooksTable(myLibrary);
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 
     this.reset();
   }
@@ -116,31 +127,31 @@ function displayBooksTable(bookList) {
         </div>    
         `;
     })
-    .join("");
+    .join('');
   setButtons();
 }
 
 function setButtons() {
-  const bookData = document.querySelectorAll(".delete-book");
-  const readButtons = document.querySelectorAll(".toggle-read");
+  const bookData = document.querySelectorAll('.delete-book');
+  const readButtons = document.querySelectorAll('.toggle-read');
 
   bookData.forEach((button) => {
-    button.addEventListener("submit", deleteBook);
+    button.addEventListener('submit', deleteBook);
   });
 
-  readButtons.forEach((button) => button.addEventListener("click", toggleRead));
+  readButtons.forEach((button) => button.addEventListener('click', toggleRead));
 }
 
 function deleteBook(e) {
-  console.log("delete");
-  if (!e.target.matches("input")) return;
+  console.log('delete');
+  if (!e.target.matches('input')) return;
 
   const el = e.target;
-  var result = confirm("Are you sure you want to delete this book");
+  var result = confirm('Are you sure you want to delete this book');
   if (result) {
     const bookIndex = el.dataset.index;
     myLibrary.splice(bookIndex, 1);
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
     displayBooksTable(myLibrary);
     e.stopPropagation();
   }
@@ -156,5 +167,5 @@ function toggleRead(e) {
 
 window.onload = function () {
   displayBooksTable(myLibrary);
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 };
